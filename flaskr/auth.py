@@ -14,14 +14,16 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        verifypassword = request.form['verifypassword']
         db = get_db()
         error = None
 
         if not username:
-            error = 'Username is required.'
+            error = 'Se necesita un nombre de usuario.'
         elif not password:
-            error = 'Password is required.'
-
+            error = 'Se necesita una contraseña.'
+        elif (not verifypassword == password):
+            error = 'La contraseña no coincide'
         if error is None:
             try:
                 db.execute(
@@ -30,7 +32,7 @@ def register():
                 )
                 db.commit()
             except db.IntegrityError:
-                error = f"User {username} is already registered."
+                error = f"El usuario {username} ya existe."
             else:
                 return redirect(url_for("auth.login"))
 
