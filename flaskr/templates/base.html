@@ -3,10 +3,11 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>Flaskr is life.</h1>
+  <h1>Life is Roblox.</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
+      <li><span>{{ g.user['username'] }} | {{g.user['correo']}}</span>
+      <li><a href="{{ url_for('blog.account') }}">Cuenta</a>
       <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">Registrate</a>
